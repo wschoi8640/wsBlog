@@ -1,0 +1,220 @@
+@import url(https://fonts.googleapis.com/earlyaccess/hanna.css);
+@import url(https://cdn.rawgit.com/YJSoft/Webfonts/0.1/BM_JUA.css);
+
+td {
+		font-family : 'BM JUA';
+}
+
+div {
+		font-family : 'BM JUA';
+}
+h1 {
+	font-family : 'BM JUA';
+}
+.navbar, .navbar-brand {
+	color : #343d46;
+	font-family : 'BM JUA';
+    font-size: 20px;
+}
+
+a, li {
+	color : #343d46;
+	font-family : 'BM JUA';
+	font-size : 15px;
+}
+
+
+ .portlet {
+    margin-bottom: 15px;
+}
+
+.btn-white {
+    border-color: #cccccc;
+    color: #333333;
+    background-color: #ffffff;
+}
+
+.portlet {
+    border: 1px solid;
+}
+
+.portlet .portlet-heading {
+    padding: 0 15px;
+}
+
+.portlet .portlet-heading h4 {
+    padding: 1px 0;
+    font-size: 16px;
+}
+
+.portlet .portlet-heading a {
+    color: #fff;
+}
+
+.portlet .portlet-heading a:hover,
+.portlet .portlet-heading a:active,
+.portlet .portlet-heading a:focus {
+    outline: none;
+}
+
+.portlet .portlet-widgets .dropdown-menu a {
+    color: #333;
+}
+
+.portlet .portlet-widgets ul.dropdown-menu {
+    min-width: 0;
+}
+
+.portlet .portlet-heading .portlet-title {
+    float: left;
+}
+
+.portlet .portlet-heading .portlet-title h4 {
+    margin: 10px 0;
+}
+
+.portlet .portlet-heading .portlet-widgets {
+    float: right;
+    margin: 8px 0;
+}
+
+.portlet .portlet-heading .portlet-widgets .tabbed-portlets {
+    display: inline;
+}
+
+.portlet .portlet-heading .portlet-widgets .divider {
+    margin: 0 5px;
+}
+
+.portlet .portlet-body {
+    padding: 15px;
+    background: #fff;
+}
+
+.portlet .portlet-footer {
+    padding: 10px 15px;
+    background: #e0e7e8;
+}
+
+.portlet .portlet-footer ul {
+    margin: 0;
+}
+
+.portlet-green,
+.portlet-green>.portlet-heading {
+    border-color: #16a085;
+}
+
+.portlet-green>.portlet-heading {
+    color: #fff;
+    background-color: #16a085;
+}
+
+.portlet-orange,
+.portlet-orange>.portlet-heading {
+    border-color: #f39c12;
+}
+
+.portlet-orange>.portlet-heading {
+    color: #fff;
+    background-color: #f39c12;
+}
+
+.portlet-blue,
+.portlet-blue>.portlet-heading {
+    border-color: #2980b9;
+}
+
+.portlet-blue>.portlet-heading {
+    color: #fff;
+    background-color: #2980b9;
+}
+
+.portlet-red,
+.portlet-red>.portlet-heading {
+    border-color: #e74c3c;
+}
+
+.portlet-red>.portlet-heading {
+    color: #fff;
+    background-color: #e74c3c;
+}
+
+.portlet-purple,
+.portlet-purple>.portlet-heading {
+    border-color: #8e44ad;
+}
+
+.portlet-purple>.portlet-heading {
+    color: #fff;
+    background-color: #8e44ad;
+}
+
+.portlet-default,
+.portlet-dark-blue,
+.portlet-default>.portlet-heading,
+.portlet-dark-blue>.portlet-heading {
+    border-color: #34495e;
+}
+
+.portlet-default>.portlet-heading,
+.portlet-dark-blue>.portlet-heading {
+    color: #fff;
+    background-color: #34495e;
+}
+
+.portlet-basic,
+.portlet-basic>.portlet-heading {
+    border-color: #333;
+}
+
+.portlet-basic>.portlet-heading {
+    border-bottom: 1px solid #333;
+    color: #333;
+    background-color: #fff;
+}
+
+@media(min-width:768px) {
+    .portlet {
+        margin-bottom: 30px;
+    }
+}
+
+.img-chat{
+width:40px;
+height:40px;
+}
+
+.text-green {
+    color: #16a085;
+}
+
+.text-orange {
+    color: #f39c12;
+}
+
+.text-red {
+    color: #e74c3c;
+}
+
+.custom-switch .custom-switch-input{display:none}
+.custom-switch .custom-switch-input,.custom-switch 
+.custom-switch-input:after,.custom-switch .custom-switch-input:before,
+.custom-switch .custom-switch-input *,.custom-switch .custom-switch-input *:after,
+.custom-switch .custom-switch-input *:before,.custom-switch .custom-switch-input+.custom-switch-btn{box-sizing:border-box}
+.custom-switch .custom-switch-input:selection,.custom-switch .custom-switch-input:after:selection,
+.custom-switch .custom-switch-input:before:selection,.custom-switch .custom-switch-input *:selection,
+.custom-switch .custom-switch-input *:after:selection,.custom-switch .custom-switch-input *:before:selection,
+.custom-switch .custom-switch-input+.custom-switch-btn:selection{background:0 0}
+.custom-switch .custom-switch-input+.custom-switch-btn{outline:0;display:inline-block;position:relative;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;left:20px;cursor:pointer;width:50px;height:18.3px;margin:0;padding:4px;background:#ced4da;border-radius:76px;transition:all 300ms ease}
+.custom-switch .custom-switch-input+.custom-switch-btn:after,.custom-switch .custom-switch-input+.custom-switch-btn:before{position:relative; bottom:2px; display:block;content:"";width:15px;height:15px;}
+.custom-switch .custom-switch-input+.custom-switch-btn:after{left:2px;border-radius:50%;background:#fff;transition:all 300ms ease}
+.custom-switch .custom-switch-input+.custom-switch-btn:before{display:none}
+.custom-switch .custom-switch-input:checked+.custom-switch-btn{background:#28a745}
+.custom-switch .custom-switch-input:checked+.custom-switch-btn:after{left:27.5px}
+.custom-switch .custom-switch-input:checked+.custom-switch-btn~.custom-switch-content-checked{opacity:1;height:auto}
+.custom-switch .custom-switch-input:checked+.custom-switch-btn~.custom-switch-content-unchecked{display:none;opacity:0;height:0}
+.custom-switch .custom-switch-input:not(:checked)+.custom-switch-btn~.custom-switch-content-checked{display:none;opacity:0;height:0}
+.custom-switch .custom-switch-input:not(:checked)+.custom-switch-btn~.custom-switch-content-unchecked{opacity:1;height:auto}
+.custom-switch.custom-switch-label-status .custom-switch-input:checked+.custom-switch-btn:after{left:50px}
+                
