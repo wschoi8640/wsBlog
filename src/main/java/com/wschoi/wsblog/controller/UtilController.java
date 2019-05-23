@@ -31,19 +31,19 @@ public class UtilController
 				{
 						session.setAttribute("darkMode", -1);
 						response.getWriter().write("-1");
-						logPrinter.info("Setting Dark Mode");
+						logPrinter.info("Switching to Dark Mode");
 				}
 				else if((int)session.getAttribute("darkMode") == 1 || session.getAttribute("darkMode").equals("1")) 
 				{
 						session.setAttribute("darkMode", -1);
 						response.getWriter().write("-1");
-						logPrinter.info("Setting Dark Mode");
+						logPrinter.info("Switching to Dark Mode");
 				}
 				else if((int)session.getAttribute("darkMode") == -1 || session.getAttribute("darkMode").equals("-1")) 
 				{
 						session.setAttribute("darkMode", 1);
 						response.getWriter().write("1");
-						logPrinter.info("Setting Bright Mode");
+						logPrinter.info("Switching to Bright Mode");
 				}
 		}
 }

@@ -17,11 +17,28 @@ public class RedirectController
 		/**
 		 * Simply selects the home view to render by returning its name.
 		 */
+		
 		@RequestMapping(value = "/", method = RequestMethod.GET)
-		public String redirectToHome() 
+		public String redirectToIndex() 
 		{
 				logPrinter.info("Redirecting to index.jsp");
 			
 				return "index";
+		}
+		
+		@RequestMapping(value = "/main", method = RequestMethod.GET)
+		public String redirectToMain() 
+		{
+				logPrinter.info("Redirecting to main.jsp");
+			
+				return "main";
+		}
+		
+		@RequestMapping(value = "/login", method = RequestMethod.GET)
+		public String redirectToLogin() 
+		{
+				logPrinter.info("Redirecting to login.jsp");
+			
+				return "login";
 		}
 }
