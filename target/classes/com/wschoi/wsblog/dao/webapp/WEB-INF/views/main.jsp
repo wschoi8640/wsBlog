@@ -64,7 +64,7 @@
 		                        <i id="settingIcon" class="fa fa-cog fa-spin fa-fw menu-icon"></i><span class="caret"></span>
 		                    </a>
 							<ul class="dropdown-menu" id="myDropdown2">
-								<li><a href="logout.do" id="myFont2">로그아웃</a></li>
+								<li><a href="doLogout" id="myFont2">로그아웃</a></li>
 								<li><div class="custom-switch custom-switch-label-onoff">
 		  				   <input class="custom-switch-input" id="example_2" type="checkbox" onclick="darkmodeHandler();">
 		                   <label class="custom-switch-btn" for="example_2"></label>
@@ -132,7 +132,7 @@
 	<script>
 			$("#myDropdown2").on('click', function (e) {
 				  e.stopPropagation();
-				});
+			});
 	</script>
 	<script type="text/javascript">
 			var userID = "${userID}";
