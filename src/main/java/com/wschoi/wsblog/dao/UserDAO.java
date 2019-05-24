@@ -5,9 +5,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import org.springframework.stereotype.Repository;
+
 import com.wschoi.wsblog.dto.UserDTO;
 
-
+@Repository
 public class UserDAO {
 	private Connection conn;
 	private PreparedStatement pstmt;

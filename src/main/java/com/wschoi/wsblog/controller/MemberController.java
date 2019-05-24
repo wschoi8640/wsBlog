@@ -24,7 +24,7 @@ public class MemberController
 		@Autowired
 		LoginService loginService;
 		
-		@RequestMapping(value = "/login", method = RequestMethod.POST)
+		@RequestMapping(value = "/doLogin", method = RequestMethod.POST)
 		public String redirectToIndex(Model model,
 				HttpServletResponse response,
 				@RequestParam("userID") String userID, 

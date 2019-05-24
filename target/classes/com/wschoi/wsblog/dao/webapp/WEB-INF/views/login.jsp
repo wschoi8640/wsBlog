@@ -53,7 +53,7 @@ function submitFunction() {
 	else {
 	$.ajax({
 		type: "POST",
-		url: "login",
+		url: "doLogin",
 		data: {
 			userID : encodeURIComponent(userID),
 			userPassword : encodeURIComponent(userPassword)
@@ -119,7 +119,7 @@ function autoClosingAlert(selector, delay){
 
 	<script type="text/javascript">
 			var userID = null;
-			if("${userID}" != null){
+			if("${userID}" != ""){
 				userID = "${userID}";
 			}
 			if(userID != null){
@@ -198,6 +198,25 @@ function autoClosingAlert(selector, delay){
 			<strong>비밀번호를 입력하세요.</strong>
 		</div>	
 	</div>
+	<c:choose>
+		<c:when test="${darkMode eq null}">
+			<script>
+				$(function() {setBrightMode();});
+			</script>
+		</c:when>
+		<c:when test="${darkMode eq 1}">
+			<script>
+				$(function() {setBrightMode();});
+				$(function() {$('.example_2').removeAttr('checked');});
+			</script>
+		</c:when>
+		<c:when test="${darkMode eq -1}">
+			<script>
+				$(function() {setDarkMode();});
+				$(function() {$('#example_2').attr('checked', true);});
+			</script>
+		</c:when>
+	</c:choose>
 	<script type="text/javascript">
 	var naverLogin = new naver.LoginWithNaverId(
 		{

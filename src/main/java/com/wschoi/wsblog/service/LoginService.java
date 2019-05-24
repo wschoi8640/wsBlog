@@ -9,12 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 
 import com.wschoi.wsblog.dao.UserDAO;
 
-@Service
+@Repository
 public class LoginService 
 {
 		private static final Logger logPrinter = LoggerFactory.getLogger(LoginService.class);
