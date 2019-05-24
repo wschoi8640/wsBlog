@@ -113,19 +113,19 @@
 	<c:choose>
 		<c:when test="${darkMode eq null}">
 			<script>
-				$(function() {setBrightMode();});
+					$(function() {setBrightMode();});
 			</script>
 		</c:when>
 		<c:when test="${darkMode eq 1}">
 			<script>
-				$(function() {setBrightMode();});
-				$(function() {$('.example_2').removeAttr('checked');});
+					$(function() {setBrightMode();});
+					$(function() {$('.example_2').removeAttr('checked');});
 			</script>
 		</c:when>
 		<c:when test="${darkMode eq -1}">
 			<script>
-				$(function() {setDarkMode();});
-				$(function() {$('#example_2').attr('checked', true);});
+					$(function() {setDarkMode();});
+					$(function() {$('#example_2').attr('checked', true);});
 			</script>
 		</c:when>
 	</c:choose>
