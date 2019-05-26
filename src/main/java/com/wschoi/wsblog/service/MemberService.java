@@ -26,6 +26,8 @@ public class MemberService
 	public int login(String encodedUserID, String encodedUserPW) throws ServletException, IOException 
 	{
 			
+		logPrinter.info("checking Login Data");
+		
 		String userID = URLDecoder.decode(encodedUserID, "UTF-8");
 		String userPW = URLDecoder.decode(encodedUserPW, "UTF-8");
 		int result = userDAO.login(userID, userPW);
@@ -46,6 +48,8 @@ public class MemberService
 		String userGender = URLDecoder.decode(encodedUserGender, "UTF-8");
 		String userEmail = URLDecoder.decode(encodedUserEmail, "UTF-8");
 		String userEntryCode = URLDecoder.decode(encodedUserEntryCode, "UTF-8");
+		
+		logPrinter.info("checking Join Data");
 		
 		if(!userEntryCode.equals(ackEntryCode))
 		{

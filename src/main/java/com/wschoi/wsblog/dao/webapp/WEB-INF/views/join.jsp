@@ -21,72 +21,88 @@
 <title>WSCHOI</title>
 </head>
 <script type="text/javascript">
-function press(){
-	if(event.keyCode == 13){ 
-		joinFunction();
-	} 
+function press()
+{
+		if(event.keyCode == 13)
+		{ 
+				joinFunction();
+		} 
 }
 
-function joinFunction() {
-	var userID = $('#userID').val();
-	var userPassword = $('#userPassword').val();
-	var userName = $('#userName').val();
-	var userGender = $('#userGender').val();
-	var userEmail = $('#userEmail').val();
-	var entryCode = $('#entryCode').val();
-	
-		if(userID == null || userID == '' || userPassword == null || userPassword == '' ||
-				userName == null || userName == '' || userGender == null || userGender == '' ||
-				userEmail == null || userEmail == '' || entryCode == null || entryCode == ''){
-			autoClosingAlert('#noInput', 2000);
-		}
-		else {
-			submitFunction();
-		}
-}
-
-function submitFunction() {
-	var userID = $('#userID').val();
-	var userPassword = $('#userPassword').val();
-	var userName = $('#userName').val();
-	var userGender = $('#userGender').val();
-	var userEmail = $('#userEmail').val();
-	var entryCode = $('#entryCode').val();
-
-	if(userID != null && userID != '' && userPassword != null && userPassword != '' &&
-			userName != null && userName != '' && userGender != null && userGender != '' &&
-			userEmail != null && userEmail != '' && entryCode != null && entryCode != ''){
-		$.ajax({
-			type: "POST",
-			url: "./doJoin",
-			async : false,
-			data: {
-				userID : encodeURIComponent(userID),
-				userPassword : encodeURIComponent(userPassword),
-				userName : encodeURIComponent(userName),
-				userGender : encodeURIComponent(userGender),
-				userEmail : encodeURIComponent(userEmail),
-				entryCode : encodeURIComponent(entryCode)
-			},
-			success: function(result){
-				if(result == 0){
-					autoClosingAlert('#wrongCode', 2000);
-				} else if(result == -1){
-					autoClosingAlert('#idExists', 2000);
-				} else if(result == -2){
-					var url = "main";
-					window.location.replace(url);
-				} else {
-					autoClosingAlert('#dbError', 2000);
-				}
+function joinFunction() 
+{
+		var userID = $('#userID').val();
+		var userPassword = $('#userPassword').val();
+		var userName = $('#userName').val();
+		var userGender = $('#userGender').val();
+		var userEmail = $('#userEmail').val();
+		var entryCode = $('#entryCode').val();
+		
+			if(userID == null || userID == '' || userPassword == null || userPassword == '' ||
+					userName == null || userName == '' || userGender == null || userGender == '' ||
+					userEmail == null || userEmail == '' || entryCode == null || entryCode == '')
+			{
+					autoClosingAlert('#noInput', 2000);
+			}	
+			else 
+			{
+					submitFunction();
 			}
-		});
-	}
 }
-function autoClosingAlert(selector, delay){
-	var alert = $(selector).alert();
-	alert.show();
-	window.setTimeout(function(){ alert.hide()}, delay);
+
+function submitFunction() 
+{
+		var userID = $('#userID').val();
+		var userPassword = $('#userPassword').val();
+		var userName = $('#userName').val();
+		var userGender = $('#userGender').val();
+		var userEmail = $('#userEmail').val();
+		var entryCode = $('#entryCode').val();
+	
+		if(userID != null && userID != '' && userPassword != null && userPassword != '' &&
+				userName != null && userName != '' && userGender != null && userGender != '' &&
+				userEmail != null && userEmail != '' && entryCode != null && entryCode != '')
+		{
+				$.ajax({
+						type: "POST",
+						url: "./doJoin",
+						async : false,
+						data: 
+						{
+								userID : encodeURIComponent(userID),
+								userPassword : encodeURIComponent(userPassword),
+								userName : encodeURIComponent(userName),
+								userGender : encodeURIComponent(userGender),
+								userEmail : encodeURIComponent(userEmail),
+								entryCode : encodeURIComponent(entryCode)
+						},
+						success: function(result)
+						{
+								if(result == 0)
+								{
+									autoClosingAlert('#wrongCode', 2000);
+								} 
+								else if(result == -1)
+								{
+									autoClosingAlert('#idExists', 2000);
+								}
+								else if(result == -2)
+								{
+									var url = "main";
+									window.location.replace(url);
+								} else 
+								{
+									autoClosingAlert('#dbError', 2000);
+								}
+						}
+				});
+		}
+}
+function autoClosingAlert(selector, delay)
+{
+		var alert = $(selector).alert();
+		alert.show();
+		window.setTimeout(function(){ alert.hide()}, delay);
 }
 </script>
 <body>
@@ -213,8 +229,9 @@ function autoClosingAlert(selector, delay){
 	</div>
 	</div>
 	<script>
-		$("#myDropdown2").on('click', function (e) {
-		  e.stopPropagation();
+		$("#myDropdown2").on('click', function (e) 
+		{
+		 	 e.stopPropagation();
 		});
 	</script>
 </body>

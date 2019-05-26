@@ -1,39 +1,60 @@
 package com.wschoi.wsblog.dto;
 
-public class UserDTO {
+public class UserDTO
+{
 	private String userID;
 	private String userPassword;
 	private String userName;
 	private String userGender;
 	private String userEmail;
-	public String getUserID() {
+
+	public String getUserID()
+	{
 		return userID;
 	}
-	public void setUserID(String userID) {
+
+	public void setUserID(String userID)
+	{
 		this.userID = userID;
 	}
-	public String getUserPassword() {
+
+	public String getUserPassword()
+	{
 		return userPassword;
 	}
-	public void setUserPassword(String userPassword) {
+
+	public void setUserPassword(String userPassword)
+	{
 		this.userPassword = userPassword;
 	}
-	public String getUserName() {
+
+	public String getUserName()
+	{
 		return userName;
 	}
-	public void setUserName(String userName) {
+
+	public void setUserName(String userName)
+	{
 		this.userName = userName;
 	}
-	public String getUserGender() {
+
+	public String getUserGender()
+	{
 		return userGender;
 	}
-	public void setUserGender(String userGender) {
+
+	public void setUserGender(String userGender)
+	{
 		this.userGender = userGender;
 	}
-	public String getUserEmail() {
+
+	public String getUserEmail()
+	{
 		return userEmail;
 	}
-	public void setUserEmail(String userEmail) {
+
+	public void setUserEmail(String userEmail)
+	{
 		this.userEmail = userEmail;
 	}
 }

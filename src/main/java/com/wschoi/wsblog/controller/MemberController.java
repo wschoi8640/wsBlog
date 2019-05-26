@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.wschoi.wsblog.dto.UserDTO;
 import com.wschoi.wsblog.service.MemberService;
 
 @Controller
@@ -39,8 +38,6 @@ public class MemberController
 		response.setContentType("text/html; chatset=UTF-8");
 
 		HttpSession session = request.getSession();
-
-		logPrinter.info("checking Login Data");
 
 		int result = memberService.login(userID, userPW);
 
@@ -95,8 +92,6 @@ public class MemberController
 		
 		int result = memberService.join(userID, userPassword, userName, userGender, userEmail, userEntryCode);
 		
-		logPrinter.info("checking Join Data");
-
 		if (result == 0)
 		{
 			logPrinter.info("Join Failed - Wrong Entry Code");
