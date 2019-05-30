@@ -45,4 +45,12 @@ public class RedirectController
 		logPrinter.info("Redirecting to join.jsp");
 		return "join";
 	}
+	
+	@RequestMapping(value = "/menu", method = RequestMethod.GET)
+	public String redirectToFindMenu()
+	{
+		logPrinter.info("Redirecting to findMenu.jsp");
+		return "findMenu";
+	}
+	
 }

@@ -1,9 +1,6 @@
 package com.wschoi.wsblog.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -88,8 +85,6 @@ public class MemberController
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; chatset=UTF-8");
 		
-		HttpSession session = request.getSession();
-		
 		int result = memberService.join(userID, userPassword, userName, userGender, userEmail, userEntryCode);
 		
 		if (result == 0)
@@ -102,11 +97,16 @@ public class MemberController
 			logPrinter.info("Join Failed - ID already Exists");
 			response.getWriter().write("-1");
 		}
-		else
+		else if (result == -2)
 		{
 			logPrinter.info("Join Failed - DB Error");
 			response.getWriter().write("-2");
-
+		}
+		else if (result == 1)
+		{
+			logPrinter.info("Join Successful");
+			response.getWriter().write("1");
+			
 		}
 	}
 }
