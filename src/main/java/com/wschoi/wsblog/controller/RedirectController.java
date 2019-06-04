@@ -53,4 +53,11 @@ public class RedirectController
 		return "findMenu";
 	}
 	
+	@RequestMapping(value = "/guestBook", method = RequestMethod.GET)
+	public String redirectToGuestBook()
+	{
+		logPrinter.info("Redirecting to guestBook.jsp");
+		return "guestBook";
+	}
+	
 }
