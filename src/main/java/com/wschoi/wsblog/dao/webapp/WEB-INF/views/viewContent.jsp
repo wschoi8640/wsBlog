@@ -34,6 +34,7 @@
 					addArticleContent(result[i][0].value, result[i][1].value, result[i][2].value, result[i][3].value);
 				}
 				var pageNumber = Number(parsed.last);
+				var bbsUserID = "${bbsUserID}";
 			}
 			
 		});
@@ -103,6 +104,7 @@ body {
 	<script type="text/javascript">
 			var userID = "${userID}";
 			var bbsID = "${bbsID}";
+			
 			if(bbsID == null){
 				alert('유효하지 않은 값 입니다.');
 				location.href = 'bbs';
@@ -179,7 +181,7 @@ body {
 			</table>
 			<a href="bbs" class="btn btn-primary" id="btnList">목록</a>
 			<c:choose>
-				<c:when test="${userID ne null}">	
+				<c:when test="${userID eq bbsUserID}">	
 					<a href="update?bbsID=${bbsID}" class="btn btn-primary">수정</a>
 					<a href="delete.do?bbsID=${bbsID}" id="delete" class="btn btn-primary">삭제</a>
 				</c:when>

@@ -10,6 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.wschoi.wsblog.dao.BbsDAO;
+import com.wschoi.wsblog.dto.BbsDTO;
+
 
 /**
  * Handles requests for the application home page.
@@ -78,6 +81,10 @@ public class RedirectController
 		logPrinter.info("Redirectiong to viewContent.jsp");
 		HttpSession session = request.getSession();
 		session.setAttribute("bbsID", request.getParameter("bbsID"));
+		int bbsID = Integer.parseInt((String)session.getAttribute("bbsID"));
+		BbsDTO bbs = new BbsDAO().getBbs(bbsID);
+		session.setAttribute("bbsUserID", bbs.getUserID());
+		
 		return "viewContent";
 	}
 }

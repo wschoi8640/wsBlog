@@ -45,7 +45,9 @@ public class BbsController
 		logPrinter.info("Fetching article Content...");
 		HttpSession session = request.getSession();
 		int bbsID = Integer.parseInt((String)session.getAttribute("bbsID"));
-		String list = bbsService.getArticleList(bbsID);
+		String list = bbsService.getArticleList(bbsID, session);
+		
+		
 		response.getWriter().write(list);
 	}
 }

@@ -3,6 +3,8 @@ package com.wschoi.wsblog.service;
 import java.util.ArrayList;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
@@ -36,7 +38,7 @@ public class BbsService
 		model.addAttribute("nextPage", nextPage);
 	}
 
-	public String getArticleList(int bbsID)
+	public String getArticleList(int bbsID, HttpSession session)
 	{
 		StringBuffer result = new StringBuffer("");
 		result.append("{\"result\":[");
@@ -47,6 +49,7 @@ public class BbsService
 		result.append("{\"value\": \"" + bbs.getBbsDate().substring(0,11) + bbs.getBbsDate().substring(11,13) + "½Ã" + bbs.getBbsDate().substring(14,16) + "ºÐ" + "\"},");
 		result.append("{\"value\": \"" + bbs.getBbsContent().replaceAll(" ","&nbsp;").replaceAll("<", "&lt;").replaceAll(">","&gt;").replaceAll("\n","<br>") + "\"}]");
 		result.append("], \"last\":\"" + 0 + "\"}");
+		
 		String rs = result.toString();
 		return rs;
 	}
