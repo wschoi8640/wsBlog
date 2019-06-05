@@ -36,7 +36,22 @@ public class BbsService
 		model.addAttribute("nextPage", nextPage);
 	}
 
-	public String setBbsDTOList(Model model, int pageNumber)
+	public String getArticleList(int bbsID)
+	{
+		StringBuffer result = new StringBuffer("");
+		result.append("{\"result\":[");
+		
+		BbsDTO bbs = new BbsDAO().getBbs(bbsID);
+		result.append("[{\"value\": \"" + bbs.getBbsTitle().replaceAll(" ","&nbsp;").replaceAll("<", "&lt;").replaceAll(">","&gt;").replaceAll("\n","<br>") + "\"},");
+		result.append("{\"value\": \"" + bbs.getUserID() + "\"},");
+		result.append("{\"value\": \"" + bbs.getBbsDate().substring(0,11) + bbs.getBbsDate().substring(11,13) + "½Ã" + bbs.getBbsDate().substring(14,16) + "ºÐ" + "\"},");
+		result.append("{\"value\": \"" + bbs.getBbsContent().replaceAll(" ","&nbsp;").replaceAll("<", "&lt;").replaceAll(">","&gt;").replaceAll("\n","<br>") + "\"}]");
+		result.append("], \"last\":\"" + 0 + "\"}");
+		String rs = result.toString();
+		return rs;
+	}
+	
+	public String getBbsDTOList(Model model, int pageNumber)
 	{
 		StringBuffer result = new StringBuffer("");
 		result.append("{\"result\":[");

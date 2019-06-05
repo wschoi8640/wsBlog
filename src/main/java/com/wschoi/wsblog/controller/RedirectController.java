@@ -1,5 +1,9 @@
 package com.wschoi.wsblog.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -42,6 +46,7 @@ public class RedirectController
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
 	public String redirectToJoin()
 	{
+		
 		logPrinter.info("Redirecting to join.jsp");
 		return "join";
 	}
@@ -65,5 +70,14 @@ public class RedirectController
 	{
 		logPrinter.info("Redirecting to bbs.jsp");
 		return "bbs";
+	}
+	
+	@RequestMapping(value = "/viewContent", method = RequestMethod.GET)
+	public String redirectToViewContent(HttpServletRequest request, HttpServletResponse response)
+	{
+		logPrinter.info("Redirectiong to viewContent.jsp");
+		HttpSession session = request.getSession();
+		session.setAttribute("bbsID", request.getParameter("bbsID"));
+		return "viewContent";
 	}
 }
