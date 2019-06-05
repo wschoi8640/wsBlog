@@ -160,7 +160,7 @@
 			<ul class="nav navbar-nav">
 				<li><a href="main" id="myFont5">메인</a></li>
 				<li><a href="bbs"id="myFont1">게시판</a></li>
-				<li><a href="findMenu" id="myFont6">학식메뉴</a></li>
+				<li><a href="menu" id="myFont6">학식메뉴</a></li>
 				<li id="myActive"><a href="guestBook" id="myFont7">방명록</a></li>
 			</ul>
 			<c:choose>

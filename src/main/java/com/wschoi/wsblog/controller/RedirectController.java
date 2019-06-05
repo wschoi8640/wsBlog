@@ -60,4 +60,10 @@ public class RedirectController
 		return "guestBook";
 	}
 	
+	@RequestMapping(value = "/bbs", method = RequestMethod.GET)
+	public String redirectToBbs()
+	{
+		logPrinter.info("Redirecting to bbs.jsp");
+		return "bbs";
+	}
 }
