@@ -47,7 +47,6 @@ public class BbsController
 		int bbsID = Integer.parseInt((String)session.getAttribute("bbsID"));
 		String list = bbsService.getArticleList(bbsID, session);
 		
-		
 		response.getWriter().write(list);
 	}
 }
