@@ -81,13 +81,24 @@ public class BbsService
 
 	public int write(String encodedMyTitle, String userID, String encodedMyContent) throws UnsupportedEncodingException
 	{
-		logPrinter.info("checking bbs Data");
+		logPrinter.info("checking write Data");
 		
 		String myTitle = URLDecoder.decode(encodedMyTitle, "UTF-8");
 		String myContent = URLDecoder.decode(encodedMyContent, "UTF-8");
 
 		int result = bbsDAO.write(myTitle, userID, myContent);
 
+		return result;
+	}
+
+	public int update(String encodedMyTitle, int bbsID, String encodedMyContent) throws UnsupportedEncodingException
+	{
+		logPrinter.info("checking update Data");
+		String myTitle = URLDecoder.decode(encodedMyTitle, "UTF-8");
+		String myContent = URLDecoder.decode(encodedMyContent, "UTF-8");
+		System.out.println(myContent);
+		int result = bbsDAO.update(bbsID, myTitle, myContent);
+		
 		return result;
 	}
 }

@@ -75,4 +75,28 @@ public class BbsController
 			response.getWriter().write("1");
 		}
 	}
+	
+	@RequestMapping(value = "/doUpdate", method = RequestMethod.POST)
+	public void doUpdate(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam("myTitle") String myTitle,
+			@RequestParam("myContent") String myContent) throws IOException
+	{
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; chatset=UTF-8");
+		
+		HttpSession session = request.getSession();
+		int bbsID = Integer.parseInt((String)session.getAttribute("bbsID"));
+		int result = bbsService.update(myTitle, bbsID, myContent);
+		
+		if(result == -1)
+		{
+			logPrinter.info("write Failed - DB Error");
+			response.getWriter().write("-1");
+		}
+		else
+		{
+			logPrinter.info("update Successful");
+			response.getWriter().write("1");
+		}
+	}
 }

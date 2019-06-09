@@ -1,7 +1,6 @@
 package com.wschoi.wsblog.controller;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -76,7 +75,7 @@ public class RedirectController
 	}
 	
 	@RequestMapping(value = "/viewContent", method = RequestMethod.GET)
-	public String redirectToViewContent(HttpServletRequest request, HttpServletResponse response)
+	public String redirectToViewContent(HttpServletRequest request)
 	{
 		logPrinter.info("Redirectiong to viewContent.jsp");
 		HttpSession session = request.getSession();
@@ -93,5 +92,21 @@ public class RedirectController
 	{
 		logPrinter.info("Redirecting to write.jsp");
 		return "write";
+	}
+
+	@RequestMapping(value = "/update", method = RequestMethod.GET)
+	public String redirectToUpdate(HttpServletRequest request)
+	{
+		logPrinter.info("Redirectiong to update.jsp");
+		HttpSession session = request.getSession();
+		session.setAttribute("bbsID", request.getParameter("bbsID"));
+		int bbsID = Integer.parseInt((String)session.getAttribute("bbsID"));
+		BbsDTO bbs = new BbsDAO().getBbs(bbsID);
+		
+		session.setAttribute("bbsUserID", bbs.getUserID());
+		session.setAttribute("bbsTitle", bbs.getBbsTitle());
+		session.setAttribute("bbsContent", bbs.getBbsContent());
+		
+		return "update";
 	}
 }
