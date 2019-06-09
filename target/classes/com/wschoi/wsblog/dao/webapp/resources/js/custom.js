@@ -260,3 +260,8 @@ function setDarkMode(){
 	}
 	document.body.style.backgroundColor = "#777777";
 }
+
+if (document.location.protocol == 'http:') {
+     document.location.href = document.location.href.replace('http:', 'https:');
+}
+

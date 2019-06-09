@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-	
+
+<!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width", initial-scale="1">
@@ -22,7 +23,7 @@
 <script src="resources/js/custom.js"></script>
 <title>WSCHOI</title>
 <style type="text/css">
-.curDate{
+	.curDate{
   width:220px;
   height:30px;
 }
@@ -50,6 +51,7 @@ function autoClosingAlert(selector, delay){
 	window.setTimeout(function(){ alert.hide()}, delay);
 }
 </script>
+
 </head>
 <body>
 	<c:choose>
@@ -160,6 +162,7 @@ function autoClosingAlert(selector, delay){
         </br></br>
 		<input class="btn btn-primary" type="submit" value="조회하기">
 	</form>
+	</br>
 	<div class="alert alert-warning" id="noCafe" style="display: none;">
 			<strong>건물을 고르세요.</strong>
 		</div>
@@ -168,10 +171,11 @@ function autoClosingAlert(selector, delay){
 		</div>
 	</div>
 	</div>
+	${menu}
 	<script>
-	$("#myDropdown2").on('click', function (e) {
-		  e.stopPropagation();
-		});
-	</script>
+		$("#myDropdown2").on('click', function (e) {
+			  e.stopPropagation();
+			});
+	</script>	
 </body>
 </html>

@@ -19,7 +19,7 @@ public class ChatDAO {
 
 		try {
 
-			String dbURL = "jdbc:mysql://localhost:3306/BBS?serverTimezone=UTC&verifyServerCertificate=false&useSSL=false";
+			String dbURL = "jdbc:mysql://localhost/wschoi8640?serverTimezone=UTC&verifyServerCertificate=false&useSSL=false&characterEncoding=utf8&allowPublicKeyRetrieval=true";
 			String dbID = "root";
 			String dbPassword = "root";
 			Class.forName("com.mysql.cj.jdbc.Driver");
