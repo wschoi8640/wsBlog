@@ -91,10 +91,6 @@
 											{
 												autoClosingAlert('#dbError', 2000);
 											}
-									},
-									error : function()
-									{
-											alert('failed');
 									}
 						    }
 					);

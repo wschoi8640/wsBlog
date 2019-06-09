@@ -1,10 +1,14 @@
 package com.wschoi.wsblog.service;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
@@ -15,6 +19,8 @@ import com.wschoi.wsblog.dto.BbsDTO;
 @Repository
 public class BbsService
 {
+	private static final Logger logPrinter = LoggerFactory.getLogger(BbsService.class);
+	
 	@Autowired
 	BbsDAO bbsDAO;
 
@@ -71,5 +77,17 @@ public class BbsService
 		String rs = result.toString();
 
 		return rs;
+	}
+
+	public int write(String encodedMyTitle, String userID, String encodedMyContent) throws UnsupportedEncodingException
+	{
+		logPrinter.info("checking bbs Data");
+		
+		String myTitle = URLDecoder.decode(encodedMyTitle, "UTF-8");
+		String myContent = URLDecoder.decode(encodedMyContent, "UTF-8");
+
+		int result = bbsDAO.write(myTitle, userID, myContent);
+
+		return result;
 	}
 }

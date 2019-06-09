@@ -1,6 +1,7 @@
 package com.wschoi.wsblog.controller;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -48,5 +49,30 @@ public class BbsController
 		String list = bbsService.getArticleList(bbsID, session);
 		
 		response.getWriter().write(list);
+	}
+	
+	@RequestMapping(value = "/doWrite", method = RequestMethod.POST)
+	public void doWrite(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam("myTitle") String myTitle,
+			@RequestParam("myContent") String myContent) throws IOException
+	{
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; chatset=UTF-8");
+		
+		HttpSession session = request.getSession();
+		String userID = (String)session.getAttribute("userID");
+		
+		int result = bbsService.write(myTitle, userID, myContent);
+		
+		if(result == -1)
+		{
+			logPrinter.info("write Failed - DB Error");
+			response.getWriter().write("-1");
+		}
+		else
+		{
+			logPrinter.info("write Successful");
+			response.getWriter().write("1");
+		}
 	}
 }

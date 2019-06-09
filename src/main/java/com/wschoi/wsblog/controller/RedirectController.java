@@ -87,4 +87,11 @@ public class RedirectController
 		
 		return "viewContent";
 	}
+	
+	@RequestMapping(value = "/write", method = RequestMethod.GET)
+	public String redirectToWrite()
+	{
+		logPrinter.info("Redirecting to write.jsp");
+		return "write";
+	}
 }

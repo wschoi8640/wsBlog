@@ -89,14 +89,14 @@ function setBrightMode(){
 	document.getElementById("myFont8").style.color = "black";
 	document.getElementById("myFont8").style.backgroundColor = "#DEDEDE";
 	}
-	if(document.getElementById("summernote") != null)
+	if(document.getElementById("myContent") != null)
 	{
 		var oldlink = document.getElementsByTagName("link").item(7);
 
 	    var newlink = document.createElement("link");
 	    newlink.setAttribute("rel", "stylesheet");
 	    newlink.setAttribute("type", "text/css");
-	    newlink.setAttribute("href", 'css/flaty-summernote.css');
+	    newlink.setAttribute("href", 'resources/css/flaty-summernote.css');
 
 	    document.getElementsByTagName("head").item(0).replaceChild(newlink, oldlink);
 	    $(document).ready(function() {
@@ -116,6 +116,11 @@ function setBrightMode(){
 	{
 	document.getElementById("myFont9").style.color = "black";
 	document.getElementById("myFont9").style.backgroundColor = "#DEDEDE";
+	}
+	if(document.getElementById("myTitle") != null)
+	{
+	document.getElementById("myTitle").style.color = "black";
+	document.getElementById("myTitle").style.backgroundColor = "#DEDEDE";
 	}
 	if(document.getElementById("myFont10") != null)
 	{
@@ -207,7 +212,7 @@ function setDarkMode(){
 	document.getElementById("myFont8").style.color = "white";
 	document.getElementById("myFont8").style.backgroundColor = "#292b2c";
 	}
-	if(document.getElementById("summernote") != null)
+	if(document.getElementById("myContent") != null)
 	{
 		var oldlink = document.getElementsByTagName("link").item(7);
 
@@ -230,6 +235,11 @@ function setDarkMode(){
 					}
 				});
 			});
+	}
+	if(document.getElementById("myTitle") != null)
+	{
+	document.getElementById("myTitle").style.color = "white";
+	document.getElementById("myTitle").style.backgroundColor = "#292b2c";
 	}
 	if(document.getElementById("myFont9") != null)
 	{
