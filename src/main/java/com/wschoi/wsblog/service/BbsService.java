@@ -1,10 +1,13 @@
 package com.wschoi.wsblog.service;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -20,7 +23,7 @@ import com.wschoi.wsblog.dto.BbsDTO;
 public class BbsService
 {
 	private static final Logger logPrinter = LoggerFactory.getLogger(BbsService.class);
-	
+
 	@Autowired
 	BbsDAO bbsDAO;
 
@@ -28,12 +31,12 @@ public class BbsService
 	{
 		int pageNumber = 1;
 		Map modelMap = model.asMap();
-		if(modelMap.get("pageNumber") != null)
+		if (modelMap.get("pageNumber") != null)
 		{
 			pageNumber = Integer.parseInt((String) modelMap.get("pageNumber"));
 		}
 		model.addAttribute("pageNumber", pageNumber);
-		
+
 		return pageNumber;
 	}
 
@@ -48,30 +51,35 @@ public class BbsService
 	{
 		StringBuffer result = new StringBuffer("");
 		result.append("{\"result\":[");
-		
+
 		BbsDTO bbs = new BbsDAO().getBbs(bbsID);
-		result.append("[{\"value\": \"" + bbs.getBbsTitle().replaceAll(" ","&nbsp;").replaceAll("<", "&lt;").replaceAll(">","&gt;").replaceAll("\n","<br>") + "\"},");
+		result.append("[{\"value\": \"" + bbs.getBbsTitle().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;")
+				.replaceAll(">", "&gt;").replaceAll("\n", "<br>") + "\"},");
 		result.append("{\"value\": \"" + bbs.getUserID() + "\"},");
-		result.append("{\"value\": \"" + bbs.getBbsDate().substring(0,11) + bbs.getBbsDate().substring(11,13) + "시" + bbs.getBbsDate().substring(14,16) + "분" + "\"},");
-		result.append("{\"value\": \"" + bbs.getBbsContent().replaceAll(" ","&nbsp;").replaceAll("<", "&lt;").replaceAll(">","&gt;").replaceAll("\n","<br>") + "\"}]");
+		result.append("{\"value\": \"" + bbs.getBbsDate().substring(0, 11) + bbs.getBbsDate().substring(11, 13)
+				+ "시" + bbs.getBbsDate().substring(14, 16) + "분" + "\"},");
+		result.append("{\"value\": \"" + bbs.getBbsContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;")
+				.replaceAll(">", "&gt;").replaceAll("\n", "<br>") + "\"}]");
 		result.append("], \"last\":\"" + 0 + "\"}");
-		
+
 		String rs = result.toString();
 		return rs;
 	}
-	
+
 	public String getBbsDTOList(Model model, int pageNumber)
 	{
 		StringBuffer result = new StringBuffer("");
 		result.append("{\"result\":[");
-		
+
 		ArrayList<BbsDTO> list = bbsDAO.getList(pageNumber);
-		for(int i = 0; i < list.size(); i++) {
+		for (int i = 0; i < list.size(); i++)
+		{
 			result.append("[{\"value\": \"" + list.get(i).getBbsID() + "\"},");
 			result.append("{\"value\": \"" + list.get(i).getArrangedData() + "\"},");
 			result.append("{\"value\": \"" + list.get(i).getUserID() + "\"},");
 			result.append("{\"value\": \"" + list.get(i).getBbsTime() + "\"}]");
-			if(i != list.size() - 1) result.append(",");
+			if (i != list.size() - 1)
+				result.append(",");
 		}
 		result.append("], \"last\":\"" + pageNumber + "\"}");
 		String rs = result.toString();
@@ -79,10 +87,11 @@ public class BbsService
 		return rs;
 	}
 
-	public int write(String encodedMyTitle, String userID, String encodedMyContent) throws UnsupportedEncodingException
+	public int write(String encodedMyTitle, String userID, String encodedMyContent)
+			throws UnsupportedEncodingException
 	{
 		logPrinter.info("checking write Data");
-		
+
 		String myTitle = URLDecoder.decode(encodedMyTitle, "UTF-8");
 		String myContent = URLDecoder.decode(encodedMyContent, "UTF-8");
 
@@ -98,7 +107,32 @@ public class BbsService
 		String myContent = URLDecoder.decode(encodedMyContent, "UTF-8");
 		System.out.println(myContent);
 		int result = bbsDAO.update(bbsID, myTitle, myContent);
-		
+
+		return result;
+	}
+
+	public int delete(int bbsID, String userID, HttpServletResponse response)
+	{
+		int result = -1;
+		BbsDTO bbs = new BbsDAO().getBbs(bbsID);
+		if (!userID.equals(bbs.getUserID()))
+		{
+			try
+			{
+				PrintWriter script = response.getWriter();
+				script.println("<script>");
+				script.println("alert('not allowed!')");
+				script.println("location.href = 'bbs'");
+				script.println("</script>");
+			} catch (IOException e)
+			{
+				e.printStackTrace();
+			}
+		} else
+		{
+			BbsDAO bbsDAO = new BbsDAO();
+			result = bbsDAO.delete(bbsID);
+		}
 		return result;
 	}
 }

@@ -183,7 +183,7 @@ body {
 			<c:choose>
 				<c:when test="${userID eq bbsUserID}">	
 					<a href="update?bbsID=${bbsID}" class="btn btn-primary">수정</a>
-					<a href="delete.do?bbsID=${bbsID}" id="delete" class="btn btn-primary">삭제</a>
+					<a href="doDelete?bbsID=${bbsID}" id="delete" class="btn btn-primary">삭제</a>
 				</c:when>
 			</c:choose>
 		</div>

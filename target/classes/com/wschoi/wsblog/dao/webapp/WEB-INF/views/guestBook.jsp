@@ -59,7 +59,8 @@
 			});
 			
 		}
-		function chatListFunction(listType){
+		function chatListFunction(type){
+				var listType = type;
 				$.ajax({
 				type: "POST",
 				url: "./chatFetch",
@@ -116,7 +117,6 @@
 		}
 
 		window.onload = function(){
-			chatListFunction('today');	
 			getRealTimeChat();
 		}
 	</script>

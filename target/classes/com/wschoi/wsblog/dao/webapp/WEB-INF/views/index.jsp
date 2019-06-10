@@ -9,7 +9,7 @@
 </head>
 <body>
 	<script>
-		var url = "https://dnjstjr.site/main";
+		var url = "main";
 		window.location.replace(url);             
 	</script>
 </body>

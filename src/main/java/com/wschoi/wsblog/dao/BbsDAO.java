@@ -17,9 +17,9 @@ public class BbsDAO {
 	
 	public BbsDAO() {
 		try {
-			String dbURL = "jdbc:mysql://localhost/wschoi8640?serverTimezone=UTC&verifyServerCertificate=false&useSSL=false&characterEncoding=utf8&allowPublicKeyRetrieval=true";
-			String dbID = "root";
-			String dbPassword = "root";
+			String dbURL = "jdbc:mysql://localhost:3306/wschoi8640?serverTimezone=UTC&verifyServerCertificate=false&useSSL=false&characterEncoding=utf8&allowPublicKeyRetrieval=true";
+			String dbID = "wschoi8640";
+			String dbPassword = "z1x2c3aa@@";
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
 		}catch(Exception e) {

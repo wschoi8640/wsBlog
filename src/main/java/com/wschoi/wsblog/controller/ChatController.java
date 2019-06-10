@@ -52,7 +52,7 @@ public class ChatController
 		}
 	}
 	
-	@RequestMapping(value = "/chatFetch", method = RequestMethod.POST)
+	@RequestMapping(value = "/chatFetch", method = {RequestMethod.POST, RequestMethod.GET})
 	public void chatFetch(HttpServletRequest request, HttpServletResponse response,
 			@RequestParam("listType") String listType) throws IOException
 	{
@@ -63,7 +63,11 @@ public class ChatController
 		if(!result.equals(""))
 		{
 			logPrinter.info("Chat Fetch Successful");
+			response.getWriter().write(result);
 		}
-		response.getWriter().write(result);
+		else
+		{
+			response.getWriter().write("");
+		}
 	}
 }

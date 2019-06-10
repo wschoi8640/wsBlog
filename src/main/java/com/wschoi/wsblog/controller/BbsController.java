@@ -1,6 +1,7 @@
 package com.wschoi.wsblog.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -97,6 +98,52 @@ public class BbsController
 		{
 			logPrinter.info("update Successful");
 			response.getWriter().write("1");
+		}
+	}
+	
+	@RequestMapping(value = "/doDelete", method = RequestMethod.GET)
+	public void doDelete(HttpServletRequest request, HttpServletResponse response) throws IOException
+	{
+		int bbsID = 0;
+		if(request.getParameter("bbsID") != null){
+			bbsID = Integer.parseInt(request.getParameter("bbsID"));
+		}
+		if(bbsID == 0){
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('not valid!')");
+			script.println("location.href = 'bbs'");
+			script.println("</script>");
+		}
+		HttpSession session = request.getSession();
+		String userID = null;
+		if(session.getAttribute("userID") != null)
+		{
+			userID = (String)session.getAttribute("userID");
+		}
+		if(userID == null){
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('login first')");
+			script.println("location.href = 'login'");
+			script.println("</script>");
+		}
+		int result = bbsService.delete(bbsID, userID, response);
+		
+		if(result == -1)
+		{
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('delete failed')");
+			script.println("history.back()");
+			script.println("</script>");
+		}
+		else
+		{
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("location.href = 'bbs'");
+			script.println("</script>");
 		}
 	}
 }
