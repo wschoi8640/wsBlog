@@ -10,16 +10,14 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class UtilController 
 {
 		private static final Logger logPrinter = LoggerFactory.getLogger(UtilController.class);
 
-		@RequestMapping(value="/setDarkMode", method=RequestMethod.POST)
+		@PostMapping("/setDarkMode")
 		public void setDarkMode(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 		{
 				request.setCharacterEncoding("UTF-8");

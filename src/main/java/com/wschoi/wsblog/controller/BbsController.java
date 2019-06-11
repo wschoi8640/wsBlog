@@ -2,7 +2,6 @@ package com.wschoi.wsblog.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,8 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.wschoi.wsblog.service.BbsService;
@@ -28,7 +26,7 @@ public class BbsController
 	@Autowired
 	BbsService bbsService;
 	
-	@RequestMapping(value = "/getBbsContent", method = RequestMethod.POST)
+	@PostMapping("/getBbsContent")
 	public void getBbsContent(Model model, HttpServletResponse response) throws IOException
 	{
 		logPrinter.info("Fetching bbs Content...");
@@ -40,7 +38,7 @@ public class BbsController
 		response.getWriter().write(list);
 	}
 	
-	@RequestMapping(value ="/getArticleContent", method = RequestMethod.POST)
+	@PostMapping("/getArticleContent")
 	public void getArticleContent(HttpServletResponse response,
 				      HttpServletRequest request) throws IOException 
 	{
@@ -52,7 +50,7 @@ public class BbsController
 		response.getWriter().write(list);
 	}
 	
-	@RequestMapping(value = "/doWrite", method = RequestMethod.POST)
+	@PostMapping("/doWrite")
 	public void doWrite(HttpServletRequest request, HttpServletResponse response,
 			@RequestParam("myTitle") String myTitle,
 			@RequestParam("myContent") String myContent) throws IOException
@@ -77,7 +75,7 @@ public class BbsController
 		}
 	}
 	
-	@RequestMapping(value = "/doUpdate", method = RequestMethod.POST)
+	@PostMapping("/doUpdate")
 	public void doUpdate(HttpServletRequest request, HttpServletResponse response,
 			@RequestParam("myTitle") String myTitle,
 			@RequestParam("myContent") String myContent) throws IOException
@@ -101,7 +99,7 @@ public class BbsController
 		}
 	}
 	
-	@RequestMapping(value = "/doDelete", method = RequestMethod.GET)
+	@PostMapping("/doDelete")
 	public void doDelete(HttpServletRequest request, HttpServletResponse response) throws IOException
 	{
 		int bbsID = 0;

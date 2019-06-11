@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -24,28 +25,28 @@ public class RedirectController
 	 * Simply selects the home view to render by returning its name.
 	 */
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@GetMapping("/")
 	public String redirectToIndex() 
 	{
 		logPrinter.info("Redirecting to index.jsp");
 		return "index";
 	}
 	
-	@RequestMapping(value = "/main", method = RequestMethod.GET)
+	@GetMapping("/main")
 	public String redirectToMain() 
 	{
 		logPrinter.info("Redirecting to main.jsp");
 		return "main";
 	}
 	
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@GetMapping("/login")
 	public String redirectToLogin() 
 	{
 		logPrinter.info("Redirecting to login.jsp");
 		return "login";
 	}
 	
-	@RequestMapping(value = "/join", method = RequestMethod.GET)
+	@GetMapping("/join")
 	public String redirectToJoin()
 	{
 		
@@ -53,28 +54,28 @@ public class RedirectController
 		return "join";
 	}
 	
-	@RequestMapping(value = "/menu", method = RequestMethod.GET)
+	@GetMapping("/menu")
 	public String redirectToFindMenu()
 	{
 		logPrinter.info("Redirecting to findMenu.jsp");
 		return "findMenu";
 	}
 	
-	@RequestMapping(value = "/guestBook", method = RequestMethod.GET)
+	@GetMapping("/guestBook")
 	public String redirectToGuestBook()
 	{
 		logPrinter.info("Redirecting to guestBook.jsp");
 		return "guestBook";
 	}
 	
-	@RequestMapping(value = "/bbs", method = RequestMethod.GET)
+	@GetMapping("/bbs")
 	public String redirectToBbs()
 	{
 		logPrinter.info("Redirecting to bbs.jsp");
 		return "bbs";
 	}
 	
-	@RequestMapping(value = "/viewContent", method = RequestMethod.GET)
+	@GetMapping("/viewContent")
 	public String redirectToViewContent(HttpServletRequest request)
 	{
 		logPrinter.info("Redirectiong to viewContent.jsp");
@@ -87,14 +88,14 @@ public class RedirectController
 		return "viewContent";
 	}
 	
-	@RequestMapping(value = "/write", method = RequestMethod.GET)
+	@GetMapping("/write")
 	public String redirectToWrite()
 	{
 		logPrinter.info("Redirecting to write.jsp");
 		return "write";
 	}
 
-	@RequestMapping(value = "/update", method = RequestMethod.GET)
+	@GetMapping("/update")
 	public String redirectToUpdate(HttpServletRequest request)
 	{
 		logPrinter.info("Redirectiong to update.jsp");

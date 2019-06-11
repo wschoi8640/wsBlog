@@ -11,6 +11,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,12 +27,11 @@ public class MemberController
 	@Autowired
 	MemberService memberService;
 
-	@RequestMapping(value = "/doLogin", method = RequestMethod.POST)
+	@PostMapping("/doLogin")
 	public void doLogin(HttpServletRequest request, HttpServletResponse response,
 			@RequestParam("userID") String userID, @RequestParam("userPassword") String userPW)
 			throws ServletException, IOException
 	{
-
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; chatset=UTF-8");
 
@@ -62,7 +63,7 @@ public class MemberController
 		}
 	}
 	
-	@RequestMapping(value = "/doLogout", method = RequestMethod.GET)
+	@GetMapping("/doLogout")
 	public String doLogout(HttpServletRequest request, HttpServletResponse response) 
 	{
 		HttpSession session = request.getSession();
@@ -73,7 +74,7 @@ public class MemberController
 		return "index"; 
 	}
 	
-	@RequestMapping(value = "/doJoin", method = RequestMethod.POST)
+	@PostMapping("/doJoin")
 	public void doJoin(HttpServletRequest request, HttpServletResponse response, 
 			@RequestParam("userID") String userID,
 			@RequestParam("userPassword") String userPassword,
