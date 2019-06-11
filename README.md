@@ -48,3 +48,31 @@ public String initUpdateOwnerForm(@PathVariable("ownerId") int ownerId, Model mo
 ```
 
 * 파라미터로 사용하고 싶은 영역을 {} 괄호로 감싸서 매핑한다.
+
+### return "redirect:/url";
+
+* 다른 url로 리다이렉트 처리가 됨
+
+```java
+@RequestMapping("/doA")
+public String doA(RedirectAttributes rttr) {
+	logger.info("doA called...");
+	
+	rttr.addFlashAttribute("msg", "리다이렉트시 전달할 메세지");
+	return "redirect:/doB";
+}
+	
+@RequestMapping("/doB")
+public void doB(@ModelAttribute String msg) {
+	logger.info("doB called... msg:"+ msg);
+}
+```
+
+* RedirectAttributes를 사용하면 리다이렉트 하면서 파라미터도 전달할 수 있다.
+
+### @ModelAttribute
+
+* View에서 사용할 데이터를 설정하는 용도로 사용할 수 있다.
+* @ModelAtrribute가 설정된 메소드는 @RequestMapping 어노테이션이 적용된 메소드보다 먼저 호출된다.
+* @ModelAttribute 메소드 실행 결과로 리턴된 객체는 자동으로 Model에 저장된다.
+* @ModelAttribute 메소드의 실행 결과로 리턴된 객체를 View 페이지에서 사용할 수 있다.
