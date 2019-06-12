@@ -18,12 +18,10 @@ public class UtilController
 		private static final Logger logPrinter = LoggerFactory.getLogger(UtilController.class);
 
 		@PostMapping("/setDarkMode")
-		public void setDarkMode(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+		public void setDarkMode(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 		{
 				request.setCharacterEncoding("UTF-8");
 				response.setContentType("text/html; chatset=UTF-8");
-				
-				HttpSession session = request.getSession();
 				
 				if(session.getAttribute("darkMode") == null) 
 				{

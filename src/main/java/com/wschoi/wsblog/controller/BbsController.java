@@ -40,10 +40,9 @@ public class BbsController
 	
 	@PostMapping("/getArticleContent")
 	public void getArticleContent(HttpServletResponse response,
-				      HttpServletRequest request) throws IOException 
+				      HttpSession session) throws IOException 
 	{
 		logPrinter.info("Fetching article Content...");
-		HttpSession session = request.getSession();
 		int bbsID = Integer.parseInt((String)session.getAttribute("bbsID"));
 		String list = bbsService.getArticleList(bbsID, session);
 		
@@ -51,14 +50,15 @@ public class BbsController
 	}
 	
 	@PostMapping("/doWrite")
-	public void doWrite(HttpServletRequest request, HttpServletResponse response,
+	public void doWrite(HttpSession session, HttpServletRequest request, HttpServletResponse response,
 			@RequestParam("myTitle") String myTitle,
 			@RequestParam("myContent") String myContent) throws IOException
 	{
+		logPrinter.info("Writing article Content...");
+
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; chatset=UTF-8");
 		
-		HttpSession session = request.getSession();
 		String userID = (String)session.getAttribute("userID");
 		
 		int result = bbsService.write(myTitle, userID, myContent);
@@ -76,14 +76,15 @@ public class BbsController
 	}
 	
 	@PostMapping("/doUpdate")
-	public void doUpdate(HttpServletRequest request, HttpServletResponse response,
+	public void doUpdate(HttpSession session, HttpServletRequest request, HttpServletResponse response,
 			@RequestParam("myTitle") String myTitle,
 			@RequestParam("myContent") String myContent) throws IOException
 	{
+		logPrinter.info("Updating article Content...");
+
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; chatset=UTF-8");
 		
-		HttpSession session = request.getSession();
 		int bbsID = Integer.parseInt((String)session.getAttribute("bbsID"));
 		int result = bbsService.update(myTitle, bbsID, myContent);
 		
@@ -100,9 +101,11 @@ public class BbsController
 	}
 	
 	@PostMapping("/doDelete")
-	public void doDelete(HttpServletRequest request, HttpServletResponse response) throws IOException
+	public void doDelete(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws IOException
 	{
 		int bbsID = 0;
+		logPrinter.info("Deleting article Content...");
+		
 		if(request.getParameter("bbsID") != null){
 			bbsID = Integer.parseInt(request.getParameter("bbsID"));
 		}
@@ -113,7 +116,6 @@ public class BbsController
 			script.println("location.href = 'bbs'");
 			script.println("</script>");
 		}
-		HttpSession session = request.getSession();
 		String userID = null;
 		if(session.getAttribute("userID") != null)
 		{

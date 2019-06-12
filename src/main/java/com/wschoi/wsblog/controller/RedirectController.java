@@ -7,8 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.wschoi.wsblog.dao.BbsDAO;
 import com.wschoi.wsblog.dto.BbsDTO;
@@ -76,10 +74,9 @@ public class RedirectController
 	}
 	
 	@GetMapping("/viewContent")
-	public String redirectToViewContent(HttpServletRequest request)
+	public String redirectToViewContent(HttpSession session, HttpServletRequest request)
 	{
 		logPrinter.info("Redirectiong to viewContent.jsp");
-		HttpSession session = request.getSession();
 		session.setAttribute("bbsID", request.getParameter("bbsID"));
 		int bbsID = Integer.parseInt((String)session.getAttribute("bbsID"));
 		BbsDTO bbs = new BbsDAO().getBbs(bbsID);
@@ -96,10 +93,9 @@ public class RedirectController
 	}
 
 	@GetMapping("/update")
-	public String redirectToUpdate(HttpServletRequest request)
+	public String redirectToUpdate(HttpSession session, HttpServletRequest request)
 	{
 		logPrinter.info("Redirectiong to update.jsp");
-		HttpSession session = request.getSession();
 		session.setAttribute("bbsID", request.getParameter("bbsID"));
 		int bbsID = Integer.parseInt((String)session.getAttribute("bbsID"));
 		BbsDTO bbs = new BbsDAO().getBbs(bbsID);

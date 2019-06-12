@@ -13,8 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.wschoi.wsblog.service.MemberService;
@@ -28,14 +26,12 @@ public class MemberController
 	MemberService memberService;
 
 	@PostMapping("/doLogin")
-	public void doLogin(HttpServletRequest request, HttpServletResponse response,
+	public void doLogin(HttpSession session, HttpServletRequest request, HttpServletResponse response,
 			@RequestParam("userID") String userID, @RequestParam("userPassword") String userPW)
 			throws ServletException, IOException
 	{
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; chatset=UTF-8");
-
-		HttpSession session = request.getSession();
 
 		int result = memberService.login(userID, userPW);
 
@@ -64,11 +60,9 @@ public class MemberController
 	}
 	
 	@GetMapping("/doLogout")
-	public String doLogout(HttpServletRequest request, HttpServletResponse response) 
+	public String doLogout(HttpSession session, HttpServletRequest request, HttpServletResponse response) 
 	{
-		HttpSession session = request.getSession();
 		session.invalidate();
-		
 		logPrinter.info("Log Out successful");
 		
 		return "index"; 
