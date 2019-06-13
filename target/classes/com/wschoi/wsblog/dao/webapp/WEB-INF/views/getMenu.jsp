@@ -88,7 +88,7 @@ function autoClosingAlert(selector, delay){
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<li><a href="main" id="myFont5">메인</a></li>
-				<li><a href="bbs"id="myFont1">게시판</a></li>
+				<li><a href="bbs?pageNumber=1"id="myFont1">게시판</a></li>
 				<li id="myActive"><a href="menu" id="myFont6">학식메뉴</a></li>
 				<li><a href="guestBook" id="myFont7">방명록</a></li>
 			</ul>

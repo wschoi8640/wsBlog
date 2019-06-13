@@ -64,7 +64,7 @@ function checkFunction(){
 					history.back()
 
 				} else if (result == 1) {
-					var url = "bbs";
+					var url = "bbs?pageNumber=1";
 					window.location.replace(url);
 				}
 			}
@@ -118,7 +118,7 @@ function autoClosingAlert(selector, delay){
 		var bbsUserID = "${bbsUserID}";
 		if(bbsUserID != userID){
 			alert('유효하지 않은 접근 입니다.');
-			location.href = 'bbs';
+			location.href = 'bbs?pageNumber=1';
 		}
 	</script>
 	<nav class="navbar navbar-inverse navbar-fixed-top" id="myNav">
@@ -136,7 +136,7 @@ function autoClosingAlert(selector, delay){
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<li><a href="main" id="myFont5">메인</a></li>
-				<li id="myActive"><a href="bbs" id="myFont1">게시판</a></li>
+				<li id="myActive"><a href="bbs?pageNumber=1" id="myFont1">게시판</a></li>
 				<li><a href="findMenu" id="myFont6">학식메뉴</a></li>
 				<li><a href="guestBook" id="myFont7">방명록</a></li>
 			</ul>	

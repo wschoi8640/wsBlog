@@ -32,9 +32,15 @@ body {
 </style>
 <script type="text/javascript">
 	function getBbsContent(){
+		var pageNumber = "${pageNumber}";
+		var nextPage = "${nextPage}";
 		$.ajax({
 			type: "POST",
 			url: "./getBbsContent",
+			data:
+			{
+				pageNumber: pageNumber
+			},
 			success: function(data){
 				if(data=="") return;
 				var parsed = JSON.parse(data);
@@ -85,6 +91,8 @@ body {
 	</c:choose>
 	<script type="text/javascript">
 			var userID = "${userID}";
+			var pageNumber = "${pageNumber}";
+			var nextPage = "${nextPage}";
 	</script>
 	<nav class="navbar navbar-inverse navbar-fixed-top" id="myNav">
 	  <div class="container-fluid">
@@ -101,7 +109,7 @@ body {
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<li><a href="main" id="myFont5">메인</a></li>
-				<li id="myActive"><a href="bbs"id="myFont1">게시판</a></li>
+				<li id="myActive"><a href="bbs?pageNumber=1"id="myFont1">게시판</a></li>
 				<li><a href="menu" id="myFont6">학식메뉴</a></li>
 				<li><a href="guestBook" id="myFont7">방명록</a></li>
 			</ul>
@@ -161,15 +169,12 @@ body {
 				<tbody id = "bbsList">
 				</tbody>
 			</table>
-			<c:choose>
-				<c:when test="${pageNumber ne 1}">
-					<a href="bbs?pageNumber= ${pageNumber-1}%>" class="btn btn-success btn-arrow-left">이전</a>
-				</c:when>
-				
-				<c:when test="${nextPage eq true}">
-					<a href="bbs?pageNumber= ${pageNumber+1} %>" class="btn btn-success btn-arrow-left">다음</a>
-				</c:when>
-			</c:choose>
+				<c:if test="${pageNumber ne 1}">
+					<a href="bbs?pageNumber=${pageNumber-1}" class="btn btn-success btn-arrow-left">이전</a>
+				</c:if>
+				<c:if test="${nextPage eq true}">
+					<a href="bbs?pageNumber=${pageNumber+1}" class="btn btn-success btn-arrow-left">다음</a>
+				</c:if>
 			<a href="write" class="btn btn-primary pull-right">글쓰기</a>
 		</div>
 	</div>

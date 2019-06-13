@@ -11,7 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -27,14 +27,9 @@ public class BbsController
 	BbsService bbsService;
 	
 	@PostMapping("/getBbsContent")
-	public void getBbsContent(Model model, HttpServletResponse response) throws IOException
+	public void getBbsContent(@RequestParam("pageNumber") int pageNumber, HttpServletResponse response) throws IOException
 	{
-		logPrinter.info("Fetching bbs Content...");
-		
-		int pageNumber = bbsService.setPageNumber(model);
-		bbsService.setNextPage(model, pageNumber);
-		String list = bbsService.getBbsDTOList(model, pageNumber);
-		
+		String list = bbsService.getBbsDTOList(pageNumber);
 		response.getWriter().write(list);
 	}
 	
@@ -100,7 +95,7 @@ public class BbsController
 		}
 	}
 	
-	@PostMapping("/doDelete")
+	@GetMapping("/doDelete")
 	public void doDelete(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws IOException
 	{
 		int bbsID = 0;
@@ -113,7 +108,7 @@ public class BbsController
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("alert('not valid!')");
-			script.println("location.href = 'bbs'");
+			script.println("location.href = 'bbs?pageNumber=1'");
 			script.println("</script>");
 		}
 		String userID = null;
@@ -142,7 +137,7 @@ public class BbsController
 		{
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
-			script.println("location.href = 'bbs'");
+			script.println("location.href = 'bbs?pageNumber=1'");
 			script.println("</script>");
 		}
 	}

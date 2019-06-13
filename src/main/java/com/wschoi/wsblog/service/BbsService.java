@@ -14,7 +14,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.ui.Model;
 
 import com.wschoi.wsblog.dao.BbsDAO;
 import com.wschoi.wsblog.dto.BbsDTO;
@@ -26,26 +25,6 @@ public class BbsService
 
 	@Autowired
 	BbsDAO bbsDAO;
-
-	public int setPageNumber(Model model)
-	{
-		int pageNumber = 1;
-		Map modelMap = model.asMap();
-		if (modelMap.get("pageNumber") != null)
-		{
-			pageNumber = Integer.parseInt((String) modelMap.get("pageNumber"));
-		}
-		model.addAttribute("pageNumber", pageNumber);
-
-		return pageNumber;
-	}
-
-	public void setNextPage(Model model, int pageNumber)
-	{
-		boolean nextPage = false;
-		nextPage = bbsDAO.nextPage(pageNumber);
-		model.addAttribute("nextPage", nextPage);
-	}
 
 	public String getArticleList(int bbsID, HttpSession session)
 	{
@@ -66,12 +45,13 @@ public class BbsService
 		return rs;
 	}
 
-	public String getBbsDTOList(Model model, int pageNumber)
+	public String getBbsDTOList(int pageNumber)
 	{
 		StringBuffer result = new StringBuffer("");
 		result.append("{\"result\":[");
 
 		ArrayList<BbsDTO> list = bbsDAO.getList(pageNumber);
+		System.out.println("1st : " + pageNumber);
 		for (int i = 0; i < list.size(); i++)
 		{
 			result.append("[{\"value\": \"" + list.get(i).getBbsID() + "\"},");
@@ -83,7 +63,7 @@ public class BbsService
 		}
 		result.append("], \"last\":\"" + pageNumber + "\"}");
 		String rs = result.toString();
-
+		
 		return rs;
 	}
 
