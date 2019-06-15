@@ -10,16 +10,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width", initial-scale="1">
-<link rel="stylesheet" href="resources/css/jquery-ui.min.css">
-<link rel="stylesheet" href="resources/css/bootstrap.css">
-<link rel="stylesheet" href="resources/css/bootstrap.min.css">
-<link rel="stylesheet" href="resources/css/custom.css">
+<link rel="stylesheet" href="https://dnjstjr.site/resources/css/jquery-ui.min.css">
+<link rel="stylesheet" href="https://dnjstjr.site/resources/css/bootstrap.css">
+<link rel="stylesheet" href="https://dnjstjr.site/resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://dnjstjr.site/resources/css/custom.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@7.32.2/dist/sweetalert2.min.css">
-<script src="resources/js/jquery.js"></script>
-<script src="resources/js/jquery.min.js"></script>
-<script src="resources/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="resources/js/custom.js"></script>
+<script src="https://dnjstjr.site/resources/js/jquery.js"></script>
+<script src="https://dnjstjr.site/resources/js/jquery.min.js"></script>
+<script src="https://dnjstjr.site/resources/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://dnjstjr.site/resources/js/custom.js"></script>
 <title>WSCHOI</title>
 <style type="text/css">
 	a, a:hover {
@@ -33,22 +33,16 @@ body {
 <script type="text/javascript">
 	function getBbsContent(){
 		var pageNumber = "${pageNumber}";
-		var nextPage = "${nextPage}";
 		$.ajax({
 			type: "POST",
-			url: "./getBbsContent",
-			data:
-			{
-				pageNumber: pageNumber
-			},
+			dataType: "json",
+			url: "./getBbsContent/" + pageNumber,
 			success: function(data){
 				if(data=="") return;
-				var parsed = JSON.parse(data);
-				var result = parsed.result;
-				for(var i = 0; i < result.length; i++){
-					addBbsContent(result[i][0].value, result[i][1].value, result[i][2].value, result[i][3].value);
+				var keys = Object.keys(data);
+				for(key in keys){
+					addBbsContent(data[key].bbsID, data[key].bbsTitle, data[key].userID, data[key].bbsTime);
 				}
-				var pageNumber = Number(parsed.last);
 			}
 			
 		});
@@ -58,7 +52,7 @@ body {
 		$('#bbsList').append(
 				'<tr>' +
 				'<td>' + bbsID + '</td>' + 
-				'<td>' + '<a href="viewContent?bbsID=' + bbsID + '">' + bbsTitle + '</a>' + '</td>' + 
+				'<td>' + '<a href="/article/' + bbsID + '">' + bbsTitle + '</a>' + '</td>' + 
 				'<td>' + userID + '</td>' +
 				'<td>' + bbsTime + '</td>' +
 			    '</tr>');
@@ -104,14 +98,14 @@ body {
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="main" id="myFont">WSCHOI BLOG</a>
+			<a class="navbar-brand" href="/main" id="myFont">WSCHOI BLOG</a>
 		</div>
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li><a href="main" id="myFont5">메인</a></li>
-				<li id="myActive"><a href="bbs?pageNumber=1"id="myFont1">게시판</a></li>
-				<li><a href="menu" id="myFont6">학식메뉴</a></li>
-				<li><a href="guestBook" id="myFont7">방명록</a></li>
+				<li><a href="/main" id="myFont5">메인</a></li>
+				<li id="myActive"><a href="/bbs/1"id="myFont1">게시판</a></li>
+				<li><a href="/menu" id="myFont6">학식메뉴</a></li>
+				<li><a href="/guestBook" id="myFont7">방명록</a></li>
 			</ul>
 			<c:choose>
 				<c:when test="${userID eq null}">
@@ -121,8 +115,8 @@ body {
 		                        <i id="settingIcon" class="fa fa-cog fa-spin fa-fw menu-icon"></i><span class="caret"></span>
 		                    </a>
 							<ul class="dropdown-menu" id="myDropdown2">
-								<li><a href="login" id="myFont2">로그인</a></li>
-								<li><a href="join" id="myFont3">회원가입</a></li>
+								<li><a href="/login" id="myFont2">로그인</a></li>
+								<li><a href="/join" id="myFont3">회원가입</a></li>
 								<li><div class="custom-switch custom-switch-label-onoff">
 		  				   <input class="custom-switch-input" id="example_2" type="checkbox" onclick="darkmodeHandler();">
 		                   <label class="custom-switch-btn" for="example_2"></label>
@@ -138,7 +132,7 @@ body {
 		                        <i id="settingIcon" class="fa fa-cog fa-spin fa-fw menu-icon"></i><span class="caret"></span>
 		                    </a>
 							<ul class="dropdown-menu" id="myDropdown2">
-								<li><a href="doLogout" id="myFont2">로그아웃</a></li>
+								<li><a href="/doLogout" id="myFont2">로그아웃</a></li>
 								<li><div class="custom-switch custom-switch-label-onoff">
 		  				   <input class="custom-switch-input" id="example_2" type="checkbox" onclick="darkmodeHandler();">
 		                   <label class="custom-switch-btn" for="example_2"></label>
@@ -170,12 +164,12 @@ body {
 				</tbody>
 			</table>
 				<c:if test="${pageNumber ne 1}">
-					<a href="bbs?pageNumber=${pageNumber-1}" class="btn btn-success btn-arrow-left">이전</a>
+					<a href="${pageNumber-1}" class="btn btn-success btn-arrow-left">이전</a>
 				</c:if>
 				<c:if test="${nextPage eq true}">
-					<a href="bbs?pageNumber=${pageNumber+1}" class="btn btn-success btn-arrow-left">다음</a>
+					<a href="${pageNumber+1}" class="btn btn-success btn-arrow-left">다음</a>
 				</c:if>
-			<a href="write" class="btn btn-primary pull-right">글쓰기</a>
+			<a href="/write" class="btn btn-primary pull-right">글쓰기</a>
 		</div>
 	</div>
 	<script>

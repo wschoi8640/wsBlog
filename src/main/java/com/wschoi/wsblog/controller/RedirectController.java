@@ -9,7 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.wschoi.wsblog.dao.BbsDAO;
 import com.wschoi.wsblog.dto.BbsDTO;
@@ -42,6 +43,45 @@ public class RedirectController
 		logPrinter.info("Redirecting to main.jsp");
 		return "main";
 	}
+
+	@GetMapping("/bbs/{pageNumber}")
+	public ModelAndView redirectToBbs(HttpSession session,
+			@PathVariable int pageNumber)
+	{
+		logPrinter.info("Redirecting to bbs.jsp");
+
+		if(pageNumber == 0) pageNumber = 1;
+		boolean nextPage = bbsDAO.nextPage(pageNumber+1);
+		
+		session.setAttribute("pageNumber", pageNumber);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/bbs");
+		mav.addObject("pageNumber", pageNumber);
+		mav.addObject("nextPage", nextPage);
+
+		return mav;
+	}
+	
+	@GetMapping("/article/{bbsID}")
+	public ModelAndView redirectToViewContent(@PathVariable int bbsID)
+	{
+		logPrinter.info("Redirectiong to viewContent.jsp");
+			
+		ModelAndView mav = new ModelAndView();
+		if(bbsID == 0) 
+		{
+			mav.setViewName("/bbs");
+		}
+		else
+		{
+			BbsDTO bbs = new BbsDAO().getBbs(bbsID);
+			mav.setViewName("/article");
+			mav.addObject("bbsUserID", bbs.getUserID());
+			mav.addObject("bbsID", bbsID);
+		}
+		return mav;
+	}
 	
 	@GetMapping("/login")
 	public String redirectToLogin() 
@@ -72,30 +112,6 @@ public class RedirectController
 		return "guestBook";
 	}
 	
-	@GetMapping("/bbs")
-	public String redirectToBbs(Model model,
-			@RequestParam(value = "pageNumber", required = false) int pageNumber)
-	{
-		if(pageNumber == 0) pageNumber = 1;
-		boolean nextPage = bbsDAO.nextPage(pageNumber+1);
-		model.addAttribute("pageNumber", pageNumber);
-		model.addAttribute("nextPage", nextPage);
-		logPrinter.info("Redirecting to bbs.jsp");
-		return "bbs";
-	}
-	
-	@GetMapping("/viewContent")
-	public String redirectToViewContent(HttpSession session, HttpServletRequest request)
-	{
-		logPrinter.info("Redirectiong to viewContent.jsp");
-		session.setAttribute("bbsID", request.getParameter("bbsID"));
-		int bbsID = Integer.parseInt((String)session.getAttribute("bbsID"));
-		BbsDTO bbs = new BbsDAO().getBbs(bbsID);
-		session.setAttribute("bbsUserID", bbs.getUserID());
-		
-		return "viewContent";
-	}
-	
 	@GetMapping("/write")
 	public String redirectToWrite()
 	{
@@ -103,18 +119,20 @@ public class RedirectController
 		return "write";
 	}
 
-	@GetMapping("/update")
-	public String redirectToUpdate(HttpSession session, HttpServletRequest request)
+	@GetMapping("/update/{bbsID}")
+	public ModelAndView redirectToUpdate(@PathVariable int bbsID)
 	{
 		logPrinter.info("Redirectiong to update.jsp");
-		session.setAttribute("bbsID", request.getParameter("bbsID"));
-		int bbsID = Integer.parseInt((String)session.getAttribute("bbsID"));
 		BbsDTO bbs = new BbsDAO().getBbs(bbsID);
 		
-		session.setAttribute("bbsUserID", bbs.getUserID());
-		session.setAttribute("bbsTitle", bbs.getBbsTitle());
-		session.setAttribute("bbsContent", bbs.getBbsContent());
+		ModelAndView mav = new ModelAndView();
 		
-		return "update";
+		mav.setViewName("/update");
+		mav.addObject("bbsID", bbsID);
+		mav.addObject("bbsUserID", bbs.getUserID());
+		mav.addObject("bbsTitle", bbs.getBbsTitle());
+		mav.addObject("bbsContent", bbs.getBbsContent());
+		
+		return mav;
 	}
 }

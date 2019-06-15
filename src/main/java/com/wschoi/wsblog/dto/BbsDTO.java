@@ -1,5 +1,8 @@
 package com.wschoi.wsblog.dto;
 
+import lombok.Data;
+
+@Data
 public class BbsDTO {
 	private int bbsID;
 	private String bbsTitle;

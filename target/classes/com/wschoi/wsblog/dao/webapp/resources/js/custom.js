@@ -1,7 +1,7 @@
 function darkmodeHandler(){
 	$.ajax({
 		type: "POST",
-		url: "./setDarkMode",
+		url: "/setDarkMode",
 		
 		success: function(result){
 			if(result == 1){
@@ -96,7 +96,7 @@ function setBrightMode(){
 	    var newlink = document.createElement("link");
 	    newlink.setAttribute("rel", "stylesheet");
 	    newlink.setAttribute("type", "text/css");
-	    newlink.setAttribute("href", 'resources/css/flaty-summernote.css');
+	    newlink.setAttribute("href", 'https://dnjstjr.site/resources/css/flaty-summernote.css');
 
 	    document.getElementsByTagName("head").item(0).replaceChild(newlink, oldlink);
 	    $(document).ready(function() {
@@ -219,7 +219,7 @@ function setDarkMode(){
 	    var newlink = document.createElement("link");
 	    newlink.setAttribute("rel", "stylesheet");
 	    newlink.setAttribute("type", "text/css");
-	    newlink.setAttribute("href", 'css/darkly-summernote.css');
+	    newlink.setAttribute("href", 'https://dnjstjr.site/resources/css/darkly-summernote.css');
 
 	    document.getElementsByTagName("head").item(0).replaceChild(newlink, oldlink);
 	    
@@ -259,6 +259,11 @@ function setDarkMode(){
 	document.getElementById("myFont12").style.backgroundColor = "#DEDEDE";
 	}
 	document.body.style.backgroundColor = "#777777";
+}
+
+
+if (document.location.protocol == 'http:') {
+     document.location.href = document.location.href.replace('http:', 'https:');
 }
 
 

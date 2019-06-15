@@ -1,23 +1,24 @@
 package com.wschoi.wsblog.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.wschoi.wsblog.dto.BbsDTO;
 import com.wschoi.wsblog.service.BbsService;
 
 @Controller
+@RequestMapping("/bbs")
 public class BbsController
 {
 	
@@ -26,119 +27,15 @@ public class BbsController
 	@Autowired
 	BbsService bbsService;
 	
-	@PostMapping("/getBbsContent")
-	public void getBbsContent(@RequestParam("pageNumber") int pageNumber, HttpServletResponse response) throws IOException
+	@PostMapping("/getBbsContent/{pageNumber}")
+	@ResponseBody
+	public ArrayList<BbsDTO> getBbsContent(HttpSession session,
+			@PathVariable int pageNumber) throws IOException
 	{
-		String list = bbsService.getBbsDTOList(pageNumber);
-		response.getWriter().write(list);
-	}
-	
-	@PostMapping("/getArticleContent")
-	public void getArticleContent(HttpServletResponse response,
-				      HttpSession session) throws IOException 
-	{
-		logPrinter.info("Fetching article Content...");
-		int bbsID = Integer.parseInt((String)session.getAttribute("bbsID"));
-		String list = bbsService.getArticleList(bbsID, session);
+		logPrinter.info("Fetching articles...");
+		session.setAttribute("pageNumber", pageNumber);
+		ArrayList<BbsDTO> list = bbsService.getBbsDTOList(pageNumber);
 		
-		response.getWriter().write(list);
-	}
-	
-	@PostMapping("/doWrite")
-	public void doWrite(HttpSession session, HttpServletRequest request, HttpServletResponse response,
-			@RequestParam("myTitle") String myTitle,
-			@RequestParam("myContent") String myContent) throws IOException
-	{
-		logPrinter.info("Writing article Content...");
-
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; chatset=UTF-8");
-		
-		String userID = (String)session.getAttribute("userID");
-		
-		int result = bbsService.write(myTitle, userID, myContent);
-		
-		if(result == -1)
-		{
-			logPrinter.info("write Failed - DB Error");
-			response.getWriter().write("-1");
-		}
-		else
-		{
-			logPrinter.info("write Successful");
-			response.getWriter().write("1");
-		}
-	}
-	
-	@PostMapping("/doUpdate")
-	public void doUpdate(HttpSession session, HttpServletRequest request, HttpServletResponse response,
-			@RequestParam("myTitle") String myTitle,
-			@RequestParam("myContent") String myContent) throws IOException
-	{
-		logPrinter.info("Updating article Content...");
-
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; chatset=UTF-8");
-		
-		int bbsID = Integer.parseInt((String)session.getAttribute("bbsID"));
-		int result = bbsService.update(myTitle, bbsID, myContent);
-		
-		if(result == -1)
-		{
-			logPrinter.info("write Failed - DB Error");
-			response.getWriter().write("-1");
-		}
-		else
-		{
-			logPrinter.info("update Successful");
-			response.getWriter().write("1");
-		}
-	}
-	
-	@GetMapping("/doDelete")
-	public void doDelete(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws IOException
-	{
-		int bbsID = 0;
-		logPrinter.info("Deleting article Content...");
-		
-		if(request.getParameter("bbsID") != null){
-			bbsID = Integer.parseInt(request.getParameter("bbsID"));
-		}
-		if(bbsID == 0){
-			PrintWriter script = response.getWriter();
-			script.println("<script>");
-			script.println("alert('not valid!')");
-			script.println("location.href = 'bbs?pageNumber=1'");
-			script.println("</script>");
-		}
-		String userID = null;
-		if(session.getAttribute("userID") != null)
-		{
-			userID = (String)session.getAttribute("userID");
-		}
-		if(userID == null){
-			PrintWriter script = response.getWriter();
-			script.println("<script>");
-			script.println("alert('login first')");
-			script.println("location.href = 'login'");
-			script.println("</script>");
-		}
-		int result = bbsService.delete(bbsID, userID, response);
-		
-		if(result == -1)
-		{
-			PrintWriter script = response.getWriter();
-			script.println("<script>");
-			script.println("alert('delete failed')");
-			script.println("history.back()");
-			script.println("</script>");
-		}
-		else
-		{
-			PrintWriter script = response.getWriter();
-			script.println("<script>");
-			script.println("location.href = 'bbs?pageNumber=1'");
-			script.println("</script>");
-		}
+		return list;
 	}
 }

@@ -8,17 +8,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width" , initial-scale="1">
-<link rel="stylesheet" href="resources/css/jquery-ui.min.css">
-<link rel="stylesheet" href="resources/css/bootstrap.css">
-<link rel="stylesheet" href="resources/css/bootstrap.min.css">
-<link rel="stylesheet" href="resources/css/custom.css">
+<link rel="stylesheet" href="https://dnjstjr.site/resources/css/jquery-ui.min.css">
+<link rel="stylesheet" href="https://dnjstjr.site/resources/css/bootstrap.css">
+<link rel="stylesheet" href="https://dnjstjr.site/resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://dnjstjr.site/resources/css/custom.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@7.32.2/dist/sweetalert2.min.css">
 <script type="text/javascript"src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
-<script src="resources/js/jquery.js"></script>
-<script src="resources/js/jquery.min.js"></script>
-<script src="resources/js/bootstrap.min.js"></script>
-<script src="resources/js/custom.js"></script>
+<script src="https://dnjstjr.site/resources/js/jquery.js"></script>
+<script src="https://dnjstjr.site/resources/js/jquery.min.js"></script>
+<script src="https://dnjstjr.site/resources/js/bootstrap.min.js"></script>
+<script src="https://dnjstjr.site/resources/js/custom.js"></script>
 <title>WSCHOI</title>
 <script>
 	function press()
@@ -76,7 +76,7 @@
 									{
 											if (result == 1)
 											{
-													var url = "main";
+													var url = "/main";
 													window.location.replace(url);
 											} 
 											else if (result == 0)
@@ -114,15 +114,15 @@
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="main" id="myFont">WSCHOI BLOG</a>
+				<a class="navbar-brand" href="/main" id="myFont">WSCHOI BLOG</a>
 			</div>
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a href="main" id="myFont5">메인</a></li>
-					<li><a href="bbs?pageNumber=1" id="myFont1">게시판</a></li>
-					<li><a href="menu" id="myFont6">학식메뉴</a></li>
-					<li><a href="guestBook" id="myFont7">방명록</a></li>
+					<li><a href="/main" id="myFont5">메인</a></li>
+					<li><a href="/bbs/1" id="myFont1">게시판</a></li>
+					<li><a href="/menu" id="myFont6">학식메뉴</a></li>
+					<li><a href="/guestBook" id="myFont7">방명록</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
@@ -130,8 +130,8 @@
                         <i id="settingIcon" class="fa fa-cog fa-spin fa-fw menu-icon"></i><span class="caret"></span>
                     </a>
 					<ul class="dropdown-menu" id="myDropdown2">
-						<li><a href="login" id="myFont2">로그인</a></li>
-						<li><a href="join" id="myFont3">회원가입</a></li>
+						<li><a href="/login" id="myFont2">로그인</a></li>
+						<li><a href="/join" id="myFont3">회원가입</a></li>
 						<li>
 							<div class="custom-switch custom-switch-label-onoff">
   				   				<input class="custom-switch-input" id="example_2" type="checkbox" onclick="darkmodeHandler();">
@@ -257,7 +257,7 @@
 		}
 		if (userID != null)
 		{
-				var url = "main";
+				var url = "/main";
 				window.location.replace(url);
 		}
 	</script>

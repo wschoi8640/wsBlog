@@ -9,20 +9,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width", initial-scale="1">
-<link rel="stylesheet" href="resources/css/jquery-ui.min.css">
-<link rel="stylesheet" href="resources/css/bootstrap.css">
+<link rel="stylesheet" href="https://dnjstjr.site/resources/css/jquery-ui.min.css">
+<link rel="stylesheet" href="https://dnjstjr.site/resources/css/bootstrap.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="resources/css/custom.css">
+<link rel="stylesheet" href="https://dnjstjr.site/resources/css/custom.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@7.32.2/dist/sweetalert2.min.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css" rel="stylesheet">
-<link rel="stylesheet" href="resources/css/darkly-summernote.css">
+<link rel="stylesheet" href="https://dnjstjr.site/resources/css/darkly-summernote.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.js"></script>
-<script src="resources/js/summernote-ko-KR.js"></script>
+<script src="https://dnjstjr.site/resources/js/summernote-ko-KR.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-<script src="resources/js/custom.js"></script>
+<script src="https://dnjstjr.site/resources/js/custom.js"></script>
 <style type="text/css">
 .navbar{
       border:1px solid #000;
@@ -32,6 +32,8 @@
 </head>
 <script type="text/javascript">
 function checkFunction(){
+	var bbsID = "${bbsID}";
+	var pageNumber = "${pageNumber}";
 	var myTitle = $('#myFont9').val();
 	var myContent = $($('#summernote').summernote('code')).text();
 	var myContent1 = $('#summernote').val();
@@ -52,7 +54,7 @@ function checkFunction(){
 	else {
 		$.ajax({
 			type : "POST",
-			url : "./doUpdate",
+			url : "/article/doUpdate/" + bbsID,
 			async : false,
 			data : {
 				myTitle : encodeURIComponent(myTitle),
@@ -64,7 +66,7 @@ function checkFunction(){
 					history.back()
 
 				} else if (result == 1) {
-					var url = "bbs?pageNumber=1";
+					var url = "/bbs/" + pageNumber;
 					window.location.replace(url);
 				}
 			}
@@ -110,15 +112,16 @@ function autoClosingAlert(selector, delay){
 	</c:choose>
 	<script type="text/javascript">
 		var userID = "${userID}";
+		var pageNumber = "${pageNumber}";
+		var bbsUserID = "${bbsUserID}";
+
 		if (userID == "") {
 			alert('login first!');
-			location.href = 'login';
-		}
-		
-		var bbsUserID = "${bbsUserID}";
-		if(bbsUserID != userID){
+			window.location.replace('/login');
+		}		
+		else if(bbsUserID != userID){
 			alert('유효하지 않은 접근 입니다.');
-			location.href = 'bbs?pageNumber=1';
+			window.location.replace('/bbs/' + pageNumber);
 		}
 	</script>
 	<nav class="navbar navbar-inverse navbar-fixed-top" id="myNav">
@@ -131,14 +134,14 @@ function autoClosingAlert(selector, delay){
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="main"  id="myFont">WSCHOI BLOG</a>
+			<a class="navbar-brand" href="/main"  id="myFont">WSCHOI BLOG</a>
 		</div>
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li><a href="main" id="myFont5">메인</a></li>
-				<li id="myActive"><a href="bbs?pageNumber=1" id="myFont1">게시판</a></li>
-				<li><a href="findMenu" id="myFont6">학식메뉴</a></li>
-				<li><a href="guestBook" id="myFont7">방명록</a></li>
+				<li><a href="/main" id="myFont5">메인</a></li>
+				<li id="myActive"><a href="/bbs/1" id="myFont1">게시판</a></li>
+				<li><a href="/findMenu" id="myFont6">학식메뉴</a></li>
+				<li><a href="/guestBook" id="myFont7">방명록</a></li>
 			</ul>	
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
@@ -146,7 +149,7 @@ function autoClosingAlert(selector, delay){
                         <i id="settingIcon" class="fa fa-cog fa-spin fa-fw menu-icon"></i><span class="caret"></span>
                     </a>	
 					<ul class="dropdown-menu" id="myDropdown2">
-						<li><a href="logout.do" id="myFont2">로그아웃</a></li>
+						<li><a href="/doLogout" id="myFont2">로그아웃</a></li>
 						<li><div class="custom-switch custom-switch-label-onoff">
   				   <input class="custom-switch-input" id="example_2" type="checkbox" onclick="darkmodeHandler();">
                    <label class="custom-switch-btn" for="example_2"></label>
