@@ -18,7 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
-import com.wschi.wsblog.util.CrawlingUtil;
+import com.wschoi.wsblog.util.CrawlingUtil;
 
 
 @Repository

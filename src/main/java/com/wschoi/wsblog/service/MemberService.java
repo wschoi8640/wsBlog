@@ -29,6 +29,8 @@ public class MemberService
 		
 		String userID = URLDecoder.decode(encodedUserID, "UTF-8");
 		String userPW = URLDecoder.decode(encodedUserPW, "UTF-8");
+		
+		UserDAO userDAO = new UserDAO();
 		int result = userDAO.login(userID, userPW);
 		
 		return result;

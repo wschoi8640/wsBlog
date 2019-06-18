@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.springframework.stereotype.Repository;
@@ -21,7 +22,7 @@ public class BbsDAO {
 			String dbID = "wschoi8640";
 			String dbPassword = "z1x2c3aa@@";
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
+			if(conn==null)conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

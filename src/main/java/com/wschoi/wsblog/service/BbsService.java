@@ -17,11 +17,12 @@ public class BbsService
 
 	@Autowired
 	BbsDAO bbsDAO;
-
+	
 	public ArrayList<BbsDTO> getBbsDTOList(int pageNumber)
 	{
 
 		logPrinter.info("Searching articles...");
+		BbsDAO bbsDAO = new BbsDAO();
 		ArrayList<BbsDTO> list = bbsDAO.getList(pageNumber);
 		return list;
 	}

@@ -21,7 +21,7 @@ public class UserDAO {
 			String dbID = "wschoi8640";
 			String dbPassword = "z1x2c3aa@@";
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
+			if(conn==null) conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

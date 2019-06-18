@@ -66,7 +66,6 @@ function submitFunction()
 				$.ajax({
 						type: "POST",
 						url: "./doJoin",
-						async : false,
 						data: 
 						{
 								userID : encodeURIComponent(userID),

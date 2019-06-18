@@ -22,7 +22,7 @@ public class ArticleService
 
 	@Autowired
 	BbsDAO bbsDAO;
-
+	
 	public BbsDTO getArticleList(int bbsID)
 	{
 		BbsDTO article = new BbsDAO().getBbs(bbsID);
@@ -37,7 +37,8 @@ public class ArticleService
 		String myTitle = URLDecoder.decode(encodedMyTitle, "UTF-8");
 		String userID = URLDecoder.decode(encodedUserID, "UTF-8");
 		String myContent = URLDecoder.decode(encodedMyContent, "UTF-8");
-		
+
+		BbsDAO bbsDAO = new BbsDAO();
 		int result = bbsDAO.write(myTitle, userID, myContent);
 
 		return result;
@@ -48,6 +49,8 @@ public class ArticleService
 		logPrinter.info("checking update Data");
 		String myTitle = URLDecoder.decode(encodedMyTitle, "UTF-8");
 		String myContent = URLDecoder.decode(encodedMyContent, "UTF-8");
+		
+		BbsDAO bbsDAO = new BbsDAO();
 		int result = bbsDAO.update(bbsID, myTitle, myContent);
 
 		return result;

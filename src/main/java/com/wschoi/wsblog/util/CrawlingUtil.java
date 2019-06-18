@@ -1,4 +1,4 @@
-package com.wschi.wsblog.util;
+package com.wschoi.wsblog.util;
 
 import java.io.IOException;
 import java.text.ParseException;

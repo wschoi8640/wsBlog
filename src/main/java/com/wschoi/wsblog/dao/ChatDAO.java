@@ -16,7 +16,6 @@ public class ChatDAO {
 	private Connection con;
 
 	public ChatDAO() {
-
 		try {
 			String dbURL = "jdbc:mysql://localhost/wschoi8640?serverTimezone=UTC&verifyServerCertificate=false&useSSL=false&characterEncoding=utf8&allowPublicKeyRetrieval=true";
 			String dbID = "wschoi8640";

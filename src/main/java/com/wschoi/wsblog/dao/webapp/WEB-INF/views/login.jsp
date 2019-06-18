@@ -66,7 +66,6 @@
 							{
 									type : "POST",
 									url : "./doLogin",
-									async : false,
 									data :
 									{
 										userID : encodeURIComponent(userID),
